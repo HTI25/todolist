@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <title>Lista de tareas</title>
+  <style>
+    .tarea {
+      margin-bottom: 10px;
+    }
+    .tarea span {
+      margin-right: 10px;
+    }
+    .tarea button {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de tareas</h1>
+
+  <input type="text" id="inputTarea" placeholder="Escribe una tarea">
+  <button onclick="agregarTarea()">Agregar tarea</button>
+
+  <ul id="listaTareas"></ul>
+
+  <script>
+
+    function agregarTarea() {
+      var input = document.getElementById("inputTarea");
+      var tarea = input.value;
+
+     
+
+      if (tarea !== '') {
+        var lista = document.getElementById("listaTareas");
+        var nuevaTarea = document.createElement("li");
+        nuevaTarea.className = "tarea";
+
+
+
+
+        var descripcionTarea = document.createElement("span");
+        descripcionTarea.appendChild(document.createTextNode(tarea));
+        nuevaTarea.appendChild(descripcionTarea);
+
+        var checkboxTarea = document.createElement("input");
+        checkboxTarea.type = "checkbox";
+        checkboxTarea.addEventListener("click", function() {
+          if (this.checked) {
+            descripcionTarea.style.textDecoration = "line-through";
+          } else {
+            descripcionTarea.style.textDecoration = "none";
+          }
+        });
+        nuevaTarea.appendChild(checkboxTarea);
+
+        var botonEliminar = document.createElement("button");
+        botonEliminar.appendChild(document.createTextNode("Eliminar"));
+        botonEliminar.addEventListener("click", function() {
+          lista.removeChild(nuevaTarea);
+        });
+        nuevaTarea.appendChild(botonEliminar);
+
+        lista.appendChild(nuevaTarea);
+
+        input.value = '';
+      }
+    }
+  </script>
+
+</body>
+</html>
